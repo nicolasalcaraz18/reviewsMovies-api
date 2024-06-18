@@ -1,2 +1,10 @@
 import express from "express"
-console.log("buenas tardes miguel")
+
+
+const app = express()
+
+
+
+app.listen(8080,()=>{
+    console.log("servidor_ok:)")
+})

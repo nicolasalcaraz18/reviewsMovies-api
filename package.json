@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "tp final API-RESTful",
   "main": "index.js",
+  "type":"module",
   "scripts": {
     "start": "node .",
     "dev": "node --watch .",
