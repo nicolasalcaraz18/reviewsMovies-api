@@ -16,7 +16,7 @@ app.use((req,res)=>{
     res.status(404).send({success:false,message:"not found"})
 })
 
-await database.sync({force:false})
+await database.sync()
 
 app.listen(8080,()=>{
     console.log("servidor_express_ok:) - http://localhost:8080")

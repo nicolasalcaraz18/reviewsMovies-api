@@ -6,12 +6,12 @@ const userController= new UserController()
 
 userRoutes.get("/",userController.getUsers)
 
-userRoutes.get("/:id",userController.getUserId)
+userRoutes.get("/:userId",userController.getUserId)
 
 userRoutes.post("/",userController.createUser)
 
-userRoutes.put("/:id",userController.updateUser)
+userRoutes.put("/:userId",userController.updateUser)
 
-userRoutes.delete("/:id",userController.deleteUser)
+userRoutes.delete("/:userId",userController.deleteUser)
 
 export default userRoutes

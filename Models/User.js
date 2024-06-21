@@ -2,7 +2,7 @@ import { DataTypes,Model } from "sequelize";
 import database from "../connection/connection.js";
 
 class User extends Model{}
-// por default crea al id
+
 User.init({
     userId:{
         type:DataTypes.INTEGER,
