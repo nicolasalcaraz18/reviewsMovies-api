@@ -2,8 +2,8 @@
                                             Proyecto API de Gestión de Películas. 
 
 Descripción:
-    Esta API permite a los usuarios gestionar una lista de películas, 
-    incluyendo la creación, lectura, actualización y eliminación de usuarios, películas y reseñas.
+    Esta API permite a los usuarios gestionar reseñas sobre películas.
+    También incluye la creación, lectura, actualización y eliminación de usuarios, películas y reseñas.
 
 Alcance el proyecto:
     Usuarios: Crear, leer, actualizar y eliminar usuarios

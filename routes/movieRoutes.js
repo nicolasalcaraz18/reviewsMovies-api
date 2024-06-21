@@ -1,21 +1,15 @@
 import { Router } from "express";
+import MovieController from "../Controllers/MovieController.js";
 
 const movieRoutes = Router()
+const movieController = new MovieController()
 
-movieRoutes.post("/",(req,res)=>{
-    res.send("post movie")
-})
+movieRoutes.post("/",movieController.createMovie)
 
-movieRoutes.get("/:id",(req,res)=>{
-    res.send("get movie by id")
-})
+movieRoutes.get("/:movieId",movieController.getMovieId)
 
-movieRoutes.put("/:id",(req,res)=>{
-    res.send("update movie by id")
-})
+movieRoutes.put("/:movieId",movieController.updateMovie)
 
-movieRoutes.delete("/:id",(req,res)=>{
-    res.send("delete movie by id")
-})
+movieRoutes.delete("/:movieId",movieController.deleteMovie)
 
 export default movieRoutes

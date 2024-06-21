@@ -48,7 +48,6 @@ async updateUser(req,res){
         }else{
             res.status(404).send({ success: false, message: "Usuario no encontrado" });
         }
-        res.status(200).send({success:true,message:"usuario modificado"})
     } catch (error) {
         res.status(400).send({success:false,message:error.message})
     }
@@ -72,7 +71,6 @@ async deleteUser(req,res){
         res.status(400).send({success:false,message:error})
     }
 }
-
 
 }
 

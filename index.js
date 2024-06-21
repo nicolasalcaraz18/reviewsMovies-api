@@ -18,6 +18,7 @@ app.use((req,res)=>{
 
 await database.sync()
 
+
 app.listen(8080,()=>{
     console.log("servidor_express_ok:) - http://localhost:8080")
 })
