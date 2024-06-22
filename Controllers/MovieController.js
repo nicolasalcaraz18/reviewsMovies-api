@@ -29,9 +29,9 @@ class MovieController{
 
     async updateMovie(req,res){
         try {
-            const movieId = req.params;
+            const {movieId} = req.params;
             const {titulo,descripcion,año_de_lanzamiento}= req.body;
-            const [update] = await Movie.update({titulo,descripcion,año_de_lanzamiento},{where:movieId})
+            const [update] = await Movie.update({titulo,descripcion,año_de_lanzamiento},{where:{movieId}})
             if(update){
                 res.status(200).send({ success: true, message: "Pelicula modificada" });
             }else{
@@ -44,7 +44,7 @@ class MovieController{
 
     async deleteMovie(req,res){
         try {
-            const movieId = req.params
+            const {movieId} = req.params
             const deleted = Movie.destroy({
                 where:{
                     movieId:movieId

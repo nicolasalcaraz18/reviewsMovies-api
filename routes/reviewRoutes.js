@@ -1,21 +1,15 @@
 import {Router} from "express"
+import ReviewController from "../Controllers/ReviewController.js"
 
 const reviewRoutes = Router()
+const reviewController = new ReviewController()
 
-reviewRoutes.post("/",(req,res)=>{
-    res.send("post reviews")
-})
+reviewRoutes.post("/", reviewController.createReview)
 
-reviewRoutes.get("/:id",(req,res)=>{
-    res.send("get review by id")
-})
+reviewRoutes.get("/:reviewId", reviewController.getReviewId)
 
-reviewRoutes.put("/:id",(req,res)=>{
-    res.send("update review by id")
-})
+reviewRoutes.put("/:reviewId", reviewController.updateReview)
 
-reviewRoutes.delete("/:id",(req,res)=>{
-    res.send("delete review by id")
-})
+reviewRoutes.delete("/:reviewId",reviewController.deleteReview)
 
 export default reviewRoutes

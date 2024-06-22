@@ -18,7 +18,7 @@ Movie.init({
         allowNull:false,
     },
     año_de_lanzamiento:{
-        type:DataTypes.INTEGER, // recordar que el tipo de dato no es un integer.
+        type:DataTypes.INTEGER, 
         allowNull:false,
     }
 },{
