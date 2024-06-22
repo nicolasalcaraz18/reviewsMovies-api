@@ -1,9 +1,10 @@
 import { Sequelize } from "sequelize"
+import {DB_NAME,DB_USER,DB_PASSWORD,DB_HOST,DB_DIALECT,DB_PORT} from "../config/config.js"
 
-const database= new Sequelize("proyect_movies_db","root","",{
-    host:"localhost",
-    dialect:"mysql",
-    port:"3306",
+const database= new Sequelize(DB_NAME,DB_USER,DB_PASSWORD,{
+    host:DB_HOST,
+    dialect:DB_DIALECT,
+    port:DB_PORT
 })
 
 try {

@@ -2,6 +2,7 @@ import express from "express"
 import routes from "./routes/routes.js"
 import morgan from "morgan"
 import database from "./connection/connection.js"
+import { SERVER_PORT } from "./config/config.js"
 
 const app = express()
 
@@ -18,7 +19,6 @@ app.use((req,res)=>{
 
 await database.sync()
 
-
-app.listen(8080,()=>{
-    console.log("servidor_express_ok:) - http://localhost:8080")
+app.listen(SERVER_PORT,()=>{
+    console.log("servidor_express_ok :)  http://localhost:8080")
 })

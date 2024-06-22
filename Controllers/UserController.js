@@ -4,8 +4,8 @@ class UserController{
 
 async getUsers(req,res){
     try {
-        const {userId,name,email,password} = req.body
-        const usuarios = await User.findAll(userId,name,email,password)
+        const usuarios = await User.findAll({
+            attributes:["userId","name","email"]})
         res.status(200).send({success:true,message:usuarios})
     } catch (error) {
         res.status(400).send({success:false,message:error.message})
@@ -15,7 +15,12 @@ async getUsers(req,res){
 async getUserId(req,res){
     try {
         const {userId}= req.params;
-        const usuario = await User.findOne({where:{userId}})
+        const usuario = await User.findOne({
+            attributes:["userId","name","email"],
+            where:{
+                userId:userId
+            },
+        })
         if(!usuario){
             return res.status(404).send({ success: false, message: "Usuario no encontrado" });
         } 
