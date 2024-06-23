@@ -27,7 +27,7 @@ async getUserId(req,res){
                     include:[
                         {
                             model:Movie,
-                            attributes:["titulo"],
+                            attributes:["titulo","descripcion","año_de_lanzamiento"],
                         }
                     ]
                 }

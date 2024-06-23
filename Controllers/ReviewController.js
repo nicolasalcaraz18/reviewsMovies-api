@@ -1,14 +1,24 @@
-import {Review} from "../Models/models.js";
+import {Review,User,Movie} from "../Models/models.js";
 
 class ReviewController{
 
     async createReview(req,res){
         try {
-            const {rating,comment} = req.body
+            const {userId,movieId,rating,comment} = req.body
+            const user = await User.findByPk(userId)
+            const movie = await Movie.findByPk(movieId)
+
+            if(!user){
+                return res.status(404).send({success:false,message:"El usuario no existe"})
+            }
+            if(!movie){
+                return res.status(404).send({success:false,message:"Pelicula inexistete"})
+            }
+
             if(!rating || !comment){
                 return res.status(400).send({ success: false, message: "Todos los campos son obligatorios" });
             }
-            const newReview = await Review.create({rating,comment})
+            const newReview = await Review.create({userId,movieId,rating,comment})
             res.status(201).send({success:true,message:"Reseña creada",user:newReview}) 
         } catch (error) {
             res.status(400).send({success:false,message:error.message})
@@ -18,7 +28,22 @@ class ReviewController{
     async getReviewId(req,res){
         try {
             const {reviewId} = req.params;
-            const review = await Review.findOne({where:{reviewId}})
+            const review = await Review.findOne({
+                attributes:["rating","comment"],
+                where:{
+                    reviewId:reviewId
+                },
+                include: [
+                    {
+                        model: User,
+                        attributes: ["name", "email"]
+                    },
+                    {
+                        model: Movie,
+                        attributes: ["titulo", "descripcion", "año_de_lanzamiento"]
+                    }
+                ]
+            })
             if (!review){
                 return res.status(404).send({ success: false, message: "No se encontro la reseña" });
             }
