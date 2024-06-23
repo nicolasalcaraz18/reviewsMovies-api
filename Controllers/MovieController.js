@@ -1,4 +1,4 @@
-import Movie from "../Models/Movie.js";
+import {Movie} from "../Models/models.js";
 
 class MovieController{
     async createMovie(req,res){

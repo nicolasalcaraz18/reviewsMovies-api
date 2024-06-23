@@ -1,4 +1,4 @@
-import Review from "../Models/Review.js";
+import {Review} from "../Models/models.js";
 
 class ReviewController{
 

@@ -20,5 +20,5 @@ app.use((req,res)=>{
 await database.sync()
 
 app.listen(SERVER_PORT,()=>{
-    console.log("servidor_express_ok :)  http://localhost:8080")
+    console.log(`server_ok_in_port:${SERVER_PORT} :)`)
 })

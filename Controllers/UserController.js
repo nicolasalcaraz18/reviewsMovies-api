@@ -1,4 +1,4 @@
-import User from "../Models/User.js"
+import {User,Review,Movie} from "../Models/models.js"
 
 class UserController{
 
@@ -20,6 +20,18 @@ async getUserId(req,res){
             where:{
                 userId:userId
             },
+            include:[
+                {
+                    model:Review,
+                    attributes:["reviewId","rating","comment","movieId"],//Ver si me sirve el id tanto del Review como de Movie
+                    include:[
+                        {
+                            model:Movie,
+                            attributes:["titulo"],
+                        }
+                    ]
+                }
+            ]
         })
         if(!usuario){
             return res.status(404).send({ success: false, message: "Usuario no encontrado" });
