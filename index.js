@@ -21,7 +21,7 @@ app.use((req,res)=>{
     res.status(404).send({success:false,message:"not found"})
 })
 
-await database.sync({force:false})
+await database.sync()
 
 app.listen(SERVER_PORT,()=>{
     console.log(`server_ok_in_port:${SERVER_PORT} :)`)

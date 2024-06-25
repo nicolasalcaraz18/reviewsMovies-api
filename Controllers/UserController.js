@@ -1,5 +1,5 @@
 import {User,Review,Movie} from "../Models/models.js"
-import { generateToken, verifyToken} from "../utils/token.js"
+import { generateToken} from "../utils/token.js"
 
 class UserController{
 
@@ -13,6 +13,10 @@ async getUsers(req,res){
     }
 } 
 
+/**
+ * @api{get}/users/:userId, se obtiene información del usuario por id
+ * @returns en caso de encontrarlo, devolverá las reseñas a películas que ha visto.
+ */
 async getUserId(req,res){
     try {
         const {userId}= req.params;
@@ -42,7 +46,12 @@ async getUserId(req,res){
         res.status(400).send({success:false,message:error.message})
     }
 }
-//post
+/**
+ * @api{post}/users/
+ * válida que los campos que llegan por el body existan, caso contrario respondera con un error de tipo 400
+ * @returns una vez válidado creara al usuario y lo agregara en la base de datos, retorna status 201(created) y 
+ * el nombre y el mail del usuario.
+ */
 async createUser(req,res){
     try {
         const {name,email,password} = req.body;
@@ -90,6 +99,12 @@ async deleteUser(req,res){
     }
 }
 
+/**
+ * @api{post}/users/login Inicia sesión
+    en caso de esta mal el email o la contraseña lanzara una respuesta de tipo (404 No Content)
+    @method{generateToken()}recibe un payload(objeto con datos del usuario). Retorna un token
+ * @returns el token generado se guarda en una cookie.
+ */
 login =async (req,res) => {
     try {
         const {email,password} = req.body;
@@ -121,7 +136,10 @@ login =async (req,res) => {
         res.status(400).send({success:false,message:error.message})
     }
 }
-
+/**
+ * @api {get} /users/me Se obtiene información del usuario autenticado.
+ * @return respuesta de tipo (200 OK), procede a mandar la información data del usuario
+ */
 me = async (req,res)=>{
     try {
         const {user} = req

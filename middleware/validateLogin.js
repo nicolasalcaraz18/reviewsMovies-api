@@ -1,5 +1,8 @@
 import { verifyToken } from "../utils/token.js"
-
+/**
+ * Middleware que se encarga de válidar el token JWT y autenticar al usuario.
+ * @param{function} next- función de callback para ejecutar el siguiente middleware.
+ */
 export const validateLogin = async (req, res, next) =>{
    try {
         const {token} = req.cookies
