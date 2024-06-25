@@ -1,4 +1,5 @@
 import {User,Review,Movie} from "../Models/models.js"
+import { generateToken, verifyToken} from "../utils/token.js"
 
 class UserController{
 
@@ -49,7 +50,7 @@ async createUser(req,res){
             return res.status(400).send({ success: false, message: "Todos los campos son obligatorios" });
         }
         const newUser = await User.create({name,email,password})
-        res.status(201).send({success:true,message:"user created",user:newUser})  
+        res.status(201).send({success:true,message:"user created",user:[newUser.name,newUser.email]})  
     } catch (error) {
         res.status(400).send({success:false,message:error.message})
     }
@@ -86,6 +87,46 @@ async deleteUser(req,res){
         
     } catch (error) {
         res.status(400).send({success:false,message:error})
+    }
+}
+
+login =async (req,res) => {
+    try {
+        const {email,password} = req.body;
+        const user = await User.findOne({
+            where:{
+                email,
+            }
+        })
+        if(!user){
+            return res.status(404).send({success:false,message:"Email inválido"});
+        }
+
+        const isPassword = await user.comparePassword(password)
+        if(!isPassword){
+            return res.status(401).send({success:false,message:"Contraseña incorrecta"});
+        }
+
+        const payload = {
+            userId:user.userId,
+            name:user.name
+        }
+
+        const token = generateToken(payload)
+        //console.log("token ---- : " + token)
+        res.cookie("token", token)
+        res.status(200).send({success:true,message:"usuario logueado con exito"})
+    } catch (error) {
+        res.status(400).send({success:false,message:error.message})
+    }
+}
+
+me = async (req,res)=>{
+    try {
+        const {user} = req 
+        res.status(200).send({success:true,message:{user}})
+    } catch (error) {
+        res.status(400).send({success:false,message:error.message})
     }
 }
 

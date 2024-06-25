@@ -1,5 +1,5 @@
 (ORT_YA_TALLER_II_TP_API_RESTful_Curso_E_ALCARAZ_NICOLAS)          
-                                            Proyecto API de Gestión de Películas. 
+                                            Proyecto API de Gestión de Reseñas de Películas. 
 
 Descripción:
     Esta API permite a los usuarios gestionar reseñas sobre películas.
