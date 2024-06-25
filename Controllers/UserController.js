@@ -103,13 +103,14 @@ login =async (req,res) => {
         }
 
         const isPassword = await user.comparePassword(password)
+
         if(!isPassword){
             return res.status(401).send({success:false,message:"Contraseña incorrecta"});
         }
 
         const payload = {
             userId:user.userId,
-            name:user.name
+            name:user.name,
         }
 
         const token = generateToken(payload)
@@ -123,8 +124,8 @@ login =async (req,res) => {
 
 me = async (req,res)=>{
     try {
-        const {user} = req 
-        res.status(200).send({success:true,message:{user}})
+        const {user} = req
+        res.status(200).send({success:true,message:user})
     } catch (error) {
         res.status(400).send({success:false,message:error.message})
     }

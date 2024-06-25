@@ -5,15 +5,17 @@ import { validateLogin } from "../middleware/validateLogin.js"
 const userRoutes = Router()
 const userController= new UserController()
 
-userRoutes.get("/",userController.getUsers)
-
-userRoutes.get("/me",validateLogin,userController.me)
-
-userRoutes.get("/:userId",userController.getUserId)
+userRoutes.post("/login",userController.login)
 
 userRoutes.post("/",userController.createUser)
 
-userRoutes.post("/login",userController.login)
+userRoutes.get("/me",validateLogin,userController.me)
+
+userRoutes.use(validateLogin)
+
+userRoutes.get("/",userController.getUsers)
+
+userRoutes.get("/:userId",userController.getUserId)
 
 userRoutes.put("/:userId",userController.updateUser)
 
